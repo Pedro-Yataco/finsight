@@ -12,8 +12,8 @@
 |-------|------|-------|-----------------|--------|
 | 1 | 1 | Foundation | MCP Server running, LangGraph skeleton wired to 1 tool | ✅ Done |
 | 2 | 2 | Core Agent | Agent produces a real analysis via curl | ✅ Done |
-| 3 | 3 | Frontend | Working chat UI in browser, connected to backend | 🔄 Next |
-| 4 | 4 | QA & Polish | Edge cases handled, analysis quality improved | — |
+| 3 | 3 | Frontend | Working chat UI in browser, connected to backend | ✅ Done |
+| 4 | 4 | QA & Polish | Edge cases handled, analysis quality improved | 🔄 Next |
 | 5 | 5 | Deployment | Live on Vercel + Render with public URL | — |
 | 6 | 6 | Portfolio Polish | README, ADRs, demo GIF, docs complete | — |
 
