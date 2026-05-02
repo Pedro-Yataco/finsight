@@ -3,7 +3,7 @@ from typing import Literal
 from langgraph.graph import StateGraph, END
 from langchain_core.tools import BaseTool
 from .state import AgentState
-from .nodes import router_node, fetcher_node, responder_node
+from .nodes import router_node, fetcher_node, analyzer_node, synthesizer_node, responder_node
 
 
 def _route(state: AgentState) -> Literal["fetcher", "responder"]:
@@ -15,6 +15,8 @@ def create_graph(tools: list[BaseTool]):
 
     graph.add_node("router", router_node)
     graph.add_node("fetcher", partial(fetcher_node, tools=tools))
+    graph.add_node("analyzer", analyzer_node)
+    graph.add_node("synthesizer", synthesizer_node)
     graph.add_node("responder", responder_node)
 
     graph.set_entry_point("router")
@@ -22,7 +24,9 @@ def create_graph(tools: list[BaseTool]):
         "fetcher": "fetcher",
         "responder": "responder",
     })
-    graph.add_edge("fetcher", "responder")
+    graph.add_edge("fetcher", "analyzer")
+    graph.add_edge("analyzer", "synthesizer")
+    graph.add_edge("synthesizer", END)
     graph.add_edge("responder", END)
 
     return graph.compile()
