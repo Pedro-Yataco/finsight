@@ -9,7 +9,8 @@ def get_llm() -> BaseChatModel:
         from langchain_ollama import ChatOllama
         model = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
         base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-        return ChatOllama(model=model, base_url=base_url)
+        num_ctx = int(os.getenv("OLLAMA_NUM_CTX", "8192"))
+        return ChatOllama(model=model, base_url=base_url, num_ctx=num_ctx)
 
     if provider == "groq":
         from langchain_groq import ChatGroq
